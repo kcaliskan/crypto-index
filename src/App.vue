@@ -1,9 +1,18 @@
 <template>
-  <div>Hello World</div>
+  <Header />
 </template>
 
 <script>
+import Header from "./components/Header";
+
 export default {
-    name: "App"
-}
+  name: "App",
+  components: {
+    Header,
+  },
+};
 </script>
+
+<style lang="scss">
+@import "bootstrap";
+</style>
