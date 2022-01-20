@@ -1,19 +1,17 @@
 <template>
   <div>
     <Header />
-    <Home />
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 import Header from "./components/Header";
-import Home from "./views/Home";
 
 export default {
   name: "App",
   components: {
     Header,
-    Home
   },
 };
 </script>
@@ -21,7 +19,7 @@ export default {
 <style lang="scss">
 @import "bootstrap";
 
-body{
+body {
   background-color: $gray-100;
 }
 </style>
