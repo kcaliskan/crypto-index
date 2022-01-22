@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div v-if="showLoading">Loading...</div>
+    <div v-if="showLoading"><Loading /></div>
     <div v-else>
       <div v-if="!showLoading && !!cryptoData.length">
         <div>
@@ -33,10 +33,14 @@
 
 <script>
 import { mapGetters } from "vuex";
+import Loading from "./Loading";
 
 export default {
   name: "CryptoList",
   props: ["cryptoData", "fetchErrorMessage", "tableTitles", "tableDataFields"],
+  components: {
+    Loading,
+  },
   computed: {
     ...mapGetters(["showLoading"]),
   },

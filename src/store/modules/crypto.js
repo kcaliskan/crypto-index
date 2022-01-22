@@ -15,6 +15,8 @@ const getters = {
 
 const actions = {
   fetchCryptoCurrencies: async ({ commit }) => {
+    commit("setShowLoading", true);
+
     const {
       data: { data },
     } = await cryptoApi.fetchData(CRYPTO_API.BASE_URL, CRYPTO_API.CRYPTO_PATH);
