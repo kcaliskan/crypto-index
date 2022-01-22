@@ -1,15 +1,16 @@
 <template>
-  <div>
-    <div v-if="showLoading">Loading</div>
-    <div v-else>Crypto data: {{cryptoValues}}</div>
-  </div>
+  <CryptoList :cryptoData="cryptoValues" />
 </template>
 
 <script>
 import { mapActions, mapGetters } from "vuex";
+import CryptoList from "../components/CryptoList";
 
 export default {
   name: "TrendingListings",
+  components: {
+    CryptoList,
+  },
   methods: {
     ...mapActions(["fetchCryptoCurrencies"]),
   },
