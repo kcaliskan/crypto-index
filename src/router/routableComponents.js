@@ -2,6 +2,7 @@ import Enum from "enum";
 import Home from "../views/Home";
 import TrendingListings from "../views/TrendingListings";
 import Exchanges from "../views/Exchanges";
+import Portfolio from "../views/Portfolio";
 
 const components = new Enum([
   "HOME",
@@ -29,6 +30,7 @@ const routableComponents = {
   PORTFOLIO: {
     name: components.PORTFOLIO,
     path: "/portfolio",
+    component: Portfolio,
   },
 };
 
