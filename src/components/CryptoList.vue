@@ -9,11 +9,7 @@
           >
             <thead class="table-primary">
               <tr>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Market Cap</th>
-                <th>Volume (24Hr)</th>
-                <th>Change (24Hr)</th>
+                <th v-for="(title, i) in tableTitles" :key="i">{{ title }}</th>
               </tr>
             </thead>
             <tbody
@@ -22,27 +18,15 @@
               :key="crypto.id"
             >
               <tr>
-                <td>
-                  <small>{{ crypto.name }}</small>
-                </td>
-                <td>
-                  <small>{{ crypto.pricdeUsd }}</small>
-                </td>
-                <td>
-                  <small>{{ crypto.marketCapUsd }}</small>
-                </td>
-                <td>
-                  <small>{{ crypto.volumeUsd24Hr }}</small>
-                </td>
-                <td>
-                  <small>{{ crypto.changePercent24Hr }}</small>
+                <td v-for="(key, i) in tableDataFields" :key="i">
+                  <small>{{ crypto[key] }}</small>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
-      <div v-else>Fetch error</div>
+      <div v-else>{{ fetchErrorMessage }}</div>
     </div>
   </div>
 </template>
@@ -52,7 +36,7 @@ import { mapGetters } from "vuex";
 
 export default {
   name: "CryptoList",
-  props: ["cryptoData"],
+  props: ["cryptoData", "fetchErrorMessage", "tableTitles", "tableDataFields"],
   computed: {
     ...mapGetters(["showLoading"]),
   },
