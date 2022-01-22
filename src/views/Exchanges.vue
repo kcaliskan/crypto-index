@@ -1,6 +1,6 @@
 <template>
   <CryptoList
-    :cryptoData="cryptoValues"
+    :cryptoData="exchangeValues"
     :fetchErrorMessage="fetchErrorMessage"
     :tableTitles="tableTitles"
     :tableDataFields="tableDataFields"
@@ -12,32 +12,32 @@ import { mapActions, mapGetters } from "vuex";
 import CryptoList from "../components/CryptoList";
 
 import {
-  TRENDING_LISTING,
-  CRYPTO_TABLE_TITLES,
-  CRYPTO_TABLE_DATA_FIELDS,
+  EXCHANGES,
+  EXCHANGE_TABLE_TITLES,
+  EXCHANGE_TABLE_DATA_FIELDS
 } from "../constants";
 
 export default {
-  name: "TrendingListings",
+  name: "Exchanges",
   components: {
     CryptoList,
   },
   data() {
     return {
-      fetchErrorMessage: TRENDING_LISTING.fetchErrorMessage,
-      tableTitles: CRYPTO_TABLE_TITLES,
-      tableDataFields: CRYPTO_TABLE_DATA_FIELDS,
+      fetchErrorMessage: EXCHANGES.fetchErrorMessage,
+      tableTitles: EXCHANGE_TABLE_TITLES,
+      tableDataFields: EXCHANGE_TABLE_DATA_FIELDS,
     };
   },
   methods: {
-    ...mapActions(["fetchCryptoCurrencies"]),
+    ...mapActions(["fetchExchanges"]),
   },
   computed: {
-    ...mapGetters(["cryptoValues", "showLoading"]),
+    ...mapGetters(["exchangeValues"]),
   },
   beforeMount() {
-    if (!this.cryptoValues.length) {
-      this.fetchCryptoCurrencies();
+    if (!this.exchangeValues.length) {
+      this.fetchExchanges();
     }
   },
 };
