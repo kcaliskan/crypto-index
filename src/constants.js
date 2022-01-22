@@ -25,11 +25,39 @@ module.exports = {
     volume: "volumeUsd24Hr",
     changePercent: "changePercent24Hr",
   },
-  EXCHANGE_TABLE_TITLES: ["Name", "Trading Pairs", "Volume (24Hr)", "Total (%)"],
+  CRYPTO_DATA_SYMBOLS: {
+    name: "",
+    priceUsd: "$",
+    marketCapUsd: "$",
+    volumeUsd24Hr: "$",
+    changePercent24Hr: "%",
+  },
+  CRYPTO_DATA_PRECISIONS: {
+    priceUsd: 3,
+    marketCapUsd: 2,
+    volumeUsd24Hr: 2,
+    changePercent24Hr: 2,
+  },
+  EXCHANGE_TABLE_TITLES: [
+    "Name",
+    "Trading Pairs",
+    "Volume (24Hr)",
+    "Total (%)",
+  ],
   EXCHANGE_TABLE_DATA_FIELDS: {
     NAME: "name",
     TRADING_PAIRS: "tradingPairs",
     VOLUME: "volumeUsd",
-    PERCENT_TOTAL_VOLUME: "percentTotalVolume"
+    PERCENT_TOTAL_VOLUME: "percentTotalVolume",
+  },
+  EXCHANGE_DATA_SYMBOLS: {
+    name: "",
+    tradingPairs: "",
+    volumeUsd: "$",
+    percentTotalVolume: "%",
+  },
+  EXCHANGE_DATA_PRECISIONS: {
+    volumeUsd: 3,
+    percentTotalVolume: 2,
   },
 };

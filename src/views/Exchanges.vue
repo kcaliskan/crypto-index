@@ -4,6 +4,8 @@
     :fetchErrorMessage="fetchErrorMessage"
     :tableTitles="tableTitles"
     :tableDataFields="tableDataFields"
+    :tableDataSymbols="tableDataSymbols"
+    :tableDataPrecisions="tableDataPrecisions"
   />
 </template>
 
@@ -14,7 +16,9 @@ import CryptoList from "../components/CryptoList";
 import {
   EXCHANGES,
   EXCHANGE_TABLE_TITLES,
-  EXCHANGE_TABLE_DATA_FIELDS
+  EXCHANGE_TABLE_DATA_FIELDS,
+  EXCHANGE_DATA_SYMBOLS,
+  EXCHANGE_DATA_PRECISIONS,
 } from "../constants";
 
 export default {
@@ -27,6 +31,8 @@ export default {
       fetchErrorMessage: EXCHANGES.fetchErrorMessage,
       tableTitles: EXCHANGE_TABLE_TITLES,
       tableDataFields: EXCHANGE_TABLE_DATA_FIELDS,
+      tableDataSymbols: EXCHANGE_DATA_SYMBOLS,
+      tableDataPrecisions: EXCHANGE_DATA_PRECISIONS,
     };
   },
   methods: {
