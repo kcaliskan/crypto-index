@@ -13,6 +13,7 @@
     "bootstrap": "^5.1.3",
     "core-js": "^3.6.5",
     "enum": "^3.0.4",
+    "millify": "^4.0.0",
     "vee-validate": "3.4.14",
     "vue": "^2.6.11",
     "vue-router": "^3.5.3",

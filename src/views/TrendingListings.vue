@@ -4,6 +4,8 @@
     :fetchErrorMessage="fetchErrorMessage"
     :tableTitles="tableTitles"
     :tableDataFields="tableDataFields"
+    :tableDataSymbols="tableDataSymbols"
+    :tableDataPrecisions="tableDataPrecisions"
   />
 </template>
 
@@ -15,6 +17,8 @@ import {
   TRENDING_LISTING,
   CRYPTO_TABLE_TITLES,
   CRYPTO_TABLE_DATA_FIELDS,
+  CRYPTO_DATA_SYMBOLS,
+  CRYPTO_DATA_PRECISIONS,
 } from "../constants";
 
 export default {
@@ -27,6 +31,8 @@ export default {
       fetchErrorMessage: TRENDING_LISTING.fetchErrorMessage,
       tableTitles: CRYPTO_TABLE_TITLES,
       tableDataFields: CRYPTO_TABLE_DATA_FIELDS,
+      tableDataSymbols: CRYPTO_DATA_SYMBOLS,
+      tableDataPrecisions: CRYPTO_DATA_PRECISIONS,
     };
   },
   methods: {

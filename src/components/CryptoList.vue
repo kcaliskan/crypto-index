@@ -19,7 +19,13 @@
             >
               <tr>
                 <td v-for="(key, i) in tableDataFields" :key="i">
-                  <small>{{ crypto[key] }}</small>
+                  <small>{{
+                    checkValue(
+                      crypto[key],
+                      tableDataSymbols[key],
+                      tableDataPrecisions[key]
+                    )
+                  }}</small>
                 </td>
               </tr>
             </tbody>
@@ -34,12 +40,25 @@
 <script>
 import { mapGetters } from "vuex";
 import Loading from "./Loading";
+import valueConverter from "../utils/valueConverter";
 
 export default {
   name: "CryptoList",
-  props: ["cryptoData", "fetchErrorMessage", "tableTitles", "tableDataFields"],
+  props: [
+    "cryptoData",
+    "fetchErrorMessage",
+    "tableTitles",
+    "tableDataFields",
+    "tableDataSymbols",
+    "tableDataPrecisions",
+  ],
   components: {
     Loading,
+  },
+  methods: {
+    checkValue: function (val, symbol, precision) {
+      return valueConverter(val, symbol, precision);
+    },
   },
   computed: {
     ...mapGetters(["showLoading"]),
