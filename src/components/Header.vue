@@ -1,7 +1,11 @@
 <template>
   <nav class="navbar navbar-dark bg-dark navbar-expand-sm">
     <div class="container">
-      <a class="navbar-brand" href="#">Crypto Index</a>
+      <router-link 
+      class="navbar-brand" 
+      :to="routableComponents.HOME.path"
+        >Crypto Index</router-link
+      >
       <button
         class="navbar-toggler"
         type="button"
@@ -16,15 +20,30 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">
-              Trending Listings</a
+            <router-link
+              exact-active-class="active"
+              class="nav-link"
+              aria-current="page"
+              :to="routableComponents.TRENDING_LISTINGS.path"
+            >
+              Trending Listings</router-link
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Exchanges</a>
+            <router-link
+              exact-active-class="active"
+              class="nav-link"
+              :to="routableComponents.EXCHANGES.path"
+              >Exchanges</router-link
+            >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Portfolio</a>
+            <router-link
+              exact-active-class="active"
+              class="nav-link"
+              :to="routableComponents.PORTFOLIO.path"
+              >Portfolio</router-link
+            >
           </li>
         </ul>
       </div>
@@ -33,7 +52,14 @@
 </template>
 
 <script>
+import { routableComponents } from "../router/routableComponents";
+
 export default {
   name: "Header",
+  data: function () {
+    return {
+      routableComponents,
+    };
+  },
 };
 </script>
