@@ -27,6 +27,18 @@
                     )
                   }}</small>
                 </td>
+                <td v-if="!checkPortfolio(crypto.id)" v-show="showPortfolio">
+                  <i
+                    class="fas fa-regular fa-plus portfolio-icon"
+                    @click="addToPortfolio(crypto.id)"
+                  ></i>
+                </td>
+                <td v-else>
+                  <i
+                    class="fas fa-minus portfolio-icon"
+                    @click="removeFromPortfolio(crypto.id)"
+                  ></i>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -39,6 +51,8 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { mapActions } from "vuex";
+
 import Loading from "./Loading";
 import valueConverter from "../utils/valueConverter";
 
@@ -51,6 +65,7 @@ export default {
     "tableDataFields",
     "tableDataSymbols",
     "tableDataPrecisions",
+    "showPortfolio",
   ],
   components: {
     Loading,
@@ -59,9 +74,25 @@ export default {
     checkValue: function (val, symbol, precision) {
       return valueConverter(val, symbol, precision);
     },
+    checkPortfolio(cryptoId) {
+      if (!!this.cryptoPortfolio.length && !!this.cryptoData.length) {
+        return this.cryptoPortfolio.includes(cryptoId);
+      } else {
+        return false;
+      }
+    },
+
+    ...mapActions([
+      "addToPortfolio",
+      "removeFromPortfolio",
+      "checkLocalStoragePortfolio",
+    ]),
   },
   computed: {
-    ...mapGetters(["showLoading"]),
+    ...mapGetters(["showLoading", "cryptoPortfolio"]),
+  },
+  created() {
+    this.checkLocalStoragePortfolio();
   },
 };
 </script>
@@ -74,5 +105,9 @@ export default {
 
 .tbody-border {
   border-color: #f0f0f0 !important;
+}
+
+.portfolio-icon {
+  cursor: pointer;
 }
 </style>

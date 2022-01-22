@@ -6,6 +6,7 @@
     :tableDataFields="tableDataFields"
     :tableDataSymbols="tableDataSymbols"
     :tableDataPrecisions="tableDataPrecisions"
+    :showPortfolio="true"
   />
 </template>
 

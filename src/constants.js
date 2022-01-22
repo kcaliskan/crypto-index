@@ -11,12 +11,16 @@ module.exports = {
   EXCHANGES: {
     fetchErrorMessage: "There is an problem occured. Please try again later.",
   },
+  PORTFOLIO: {
+    fetchErrorMessage: "You don't have any crypto currency in your portfolio.",
+  },
   CRYPTO_TABLE_TITLES: [
     "Name",
     "Price",
     "Market Cap",
     "Volume (24Hr)",
     "Change (24Hr)",
+    "My Portfolio",
   ],
   CRYPTO_TABLE_DATA_FIELDS: {
     NAME: "name",
@@ -60,4 +64,5 @@ module.exports = {
     volumeUsd: 3,
     percentTotalVolume: 2,
   },
+  CRYPTO_PORTFOLIO: "crypto_portfolio",
 };
