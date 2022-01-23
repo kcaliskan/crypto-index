@@ -82,14 +82,14 @@ export default {
       }
     },
 
-    ...mapActions([
+    ...mapActions("crypto", [
       "addToPortfolio",
       "removeFromPortfolio",
       "checkLocalStoragePortfolio",
     ]),
   },
   computed: {
-    ...mapGetters(["showLoading", "cryptoPortfolio"]),
+    ...mapGetters("crypto", ["showLoading", "cryptoPortfolio"]),
   },
   created() {
     this.checkLocalStoragePortfolio();

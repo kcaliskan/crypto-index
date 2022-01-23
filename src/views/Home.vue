@@ -112,7 +112,7 @@ export default {
     onSubmit() {
       this.setSearchTerm(this.searchTerm);
     },
-    ...mapActions(["setSearchTerm"]),
+    ...mapActions("search", ["setSearchTerm"]),
   },
 };
 </script>
