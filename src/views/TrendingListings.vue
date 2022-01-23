@@ -37,10 +37,10 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["fetchCryptoCurrencies"]),
+    ...mapActions("crypto", ["fetchCryptoCurrencies"]),
   },
   computed: {
-    ...mapGetters(["cryptoValues", "showLoading"]),
+    ...mapGetters("crypto", ["cryptoValues", "showLoading"]),
   },
   beforeMount() {
     if (!this.cryptoValues.length) {

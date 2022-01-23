@@ -36,10 +36,10 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["fetchExchanges"]),
+    ...mapActions("crypto", ["fetchExchanges"]),
   },
   computed: {
-    ...mapGetters(["exchangeValues"]),
+    ...mapGetters("crypto", ["exchangeValues"]),
   },
   beforeMount() {
     if (!this.exchangeValues.length) {

@@ -3,7 +3,7 @@
     <div class="container">
       <router-link 
       class="navbar-brand" 
-      :to="routableComponents.HOME.path"
+      :to="componentPaths.HOME"
         >Crypto Index</router-link
       >
       <button
@@ -24,7 +24,7 @@
               exact-active-class="active"
               class="nav-link"
               aria-current="page"
-              :to="routableComponents.TRENDING_LISTINGS.path"
+              :to="componentPaths.TRENDING_LISTINGS"
             >
               Trending Listings</router-link
             >
@@ -33,7 +33,7 @@
             <router-link
               exact-active-class="active"
               class="nav-link"
-              :to="routableComponents.EXCHANGES.path"
+              :to="componentPaths.EXCHANGES"
               >Exchanges</router-link
             >
           </li>
@@ -41,7 +41,7 @@
             <router-link
               exact-active-class="active"
               class="nav-link"
-              :to="routableComponents.PORTFOLIO.path"
+              :to="componentPaths.PORTFOLIO"
               >Portfolio</router-link
             >
           </li>
@@ -52,13 +52,13 @@
 </template>
 
 <script>
-import { routableComponents } from "../router/routableComponents";
+import { componentPaths } from "../router/modules/routableComponents";
 
 export default {
   name: "Header",
   data: function () {
     return {
-      routableComponents,
+      componentPaths,
     };
   },
 };

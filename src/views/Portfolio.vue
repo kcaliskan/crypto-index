@@ -18,7 +18,7 @@
             You don't have any cryptocurrency in your portfolio.
           </h1>
           <router-link
-            :to="routableComponents.TRENDING_LISTINGS.path"
+            :to="componentPaths.TRENDING_LISTINGS"
             class="btn btn-primary"
             >Check trending cryptos to add your portfolio</router-link
           >
@@ -46,7 +46,7 @@ import {
   CRYPTO_DATA_PRECISIONS,
 } from "../constants";
 
-import { routableComponents } from "../router/routableComponents";
+import { componentPaths } from "../router/modules/routableComponents";
 
 export default {
   name: "Portfolio",
@@ -55,7 +55,7 @@ export default {
   },
   data() {
     return {
-      routableComponents,
+      componentPaths,
       fetchErrorMessage: PORTFOLIO.fetchErrorMessage,
       tableTitles: CRYPTO_TABLE_TITLES,
       tableDataFields: CRYPTO_TABLE_DATA_FIELDS,
@@ -64,10 +64,10 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["fetchCryptoCurrencies", "checkLocalStoragePortfolio"]),
+    ...mapActions("crypto", ["fetchCryptoCurrencies", "checkLocalStoragePortfolio"]),
   },
   computed: {
-    ...mapGetters(["cryptoValues", "cryptoPortfolioFullData"]),
+    ...mapGetters("crypto", ["cryptoValues", "cryptoPortfolioFullData"]),
   },
   created() {
     this.checkLocalStoragePortfolio();
