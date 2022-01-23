@@ -14,11 +14,16 @@ const getters = {
   showLoading: (state) => state.showLoading,
   cryptoPortfolio: (state) => state.portfolio,
   cryptoPortfolioFullData: (state) => {
-    return state.cryptoData.filter((crypto) => state.portfolio.includes(crypto.id));
-  }
+    return state.cryptoData.filter((crypto) =>
+      state.portfolio.includes(crypto.id)
+    );
+  },
 };
 
 const actions = {
+  setShowLoading: ({ commit }, value) => {
+    commit("setShowLoading", value);
+  },
   fetchCryptoCurrencies: async ({ commit }) => {
     commit("setShowLoading", true);
 
@@ -68,11 +73,12 @@ const actions = {
     commit("updatePortfolio", updatedPortfolio);
   },
 
-  checkLocalStoragePortfolio: ({commit}) => {
-    const portfolio = JSON.parse(window.localStorage.getItem(CRYPTO_PORTFOLIO)) || [];
+  checkLocalStoragePortfolio: ({ commit }) => {
+    const portfolio =
+      JSON.parse(window.localStorage.getItem(CRYPTO_PORTFOLIO)) || [];
 
     commit("updatePortfolio", portfolio);
-  }
+  },
 };
 
 const mutations = {
@@ -91,6 +97,7 @@ const mutations = {
 };
 
 export default {
+  namespaced: true,
   state,
   getters,
   actions,
