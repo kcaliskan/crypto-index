@@ -3,10 +3,12 @@ import { componentPaths } from "../../router/modules/routableComponents";
 /*eslint-disable*/
 const state = {
   searchTerm: "",
+  searchResult: [],
 };
 
 const getters = {
   searchTerm: (state) => state.searchTerm,
+  searchResult: (state) => state.searchResult,
 };
 
 const actions = {

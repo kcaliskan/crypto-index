@@ -33,7 +33,7 @@
                     @click="addToPortfolio(crypto.id)"
                   ></i>
                 </td>
-                <td v-else>
+                <td v-else v-show="showPortfolio">
                   <i
                     class="fas fa-minus portfolio-icon"
                     @click="removeFromPortfolio(crypto.id)"

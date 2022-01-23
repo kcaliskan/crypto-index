@@ -47,8 +47,8 @@
             <p class="card-text mt-2 card-description">
               Get to know about the most popular and trending cryptocurrencies
             </p>
-            <a href="#" class="btn btn-dark text-light text-center"
-              >Trending Listings</a
+            <router-link :to="componentPaths.TRENDING_LISTINGS" class="btn btn-dark text-light text-center"
+              >Trending Listings</router-link
             >
           </div>
         </div>
@@ -64,8 +64,8 @@
             <p class="card-text mt-2 card-description">
               Keep up with the crypto exchange markets.
             </p>
-            <a href="#" class="btn btn-dark text-light text-center"
-              >Exchanges</a
+            <router-link :to="componentPaths.EXCHANGES" class="btn btn-dark text-light text-center"
+              >Exchanges</router-link
             >
           </div>
         </div>
@@ -81,8 +81,8 @@
             <p class="card-text mt-2 card-description">
               Check your portfolio and see how they perform.
             </p>
-            <a href="#" class="btn btn-dark text-light text-center"
-              >My Portfolio</a
+            <router-link :to="componentPaths.PORTFOLIO" class="btn btn-dark text-light text-center"
+              >My Portfolio</router-link
             >
           </div>
         </div>
@@ -97,6 +97,8 @@ import { ValidationObserver, ValidationProvider } from "vee-validate";
 import "../forms/rules/req";
 import "../forms/rules/alpha_num_req";
 
+import { componentPaths } from "../router/modules/routableComponents";
+
 export default {
   name: "Home",
   components: {
@@ -106,6 +108,7 @@ export default {
   data() {
     return {
       searchTerm: "",
+      componentPaths,
     };
   },
   methods: {
