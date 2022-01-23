@@ -14,6 +14,9 @@ module.exports = {
   PORTFOLIO: {
     fetchErrorMessage: "You don't have any crypto currency in your portfolio.",
   },
+  SEARCH_RESULT: {
+    fetchErrorMessage: "You don't have any crypto currency in your portfolio.",
+  },
   CRYPTO_TABLE_TITLES: [
     "Name",
     "Price",
