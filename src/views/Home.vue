@@ -5,30 +5,30 @@
         <h2 class="text-center mb-5">
           Keep up with the crypto world by searching coins!
         </h2>
-        <ValidationObserver v-slot="{handleSubmit}">
-        <form @submit.prevent="handleSubmit(onSubmit)" novalidate>
-          <div class="form-group position-relative">
-            <ValidationProvider
-              name="searchInput"
-              rules="required|alpha_num_req"
-              v-slot="{errors}"
-            >
-            <input
-              type="text"
-              class="form-control rounded-pill shadow-lg"
-              :class="errors[0] ? 'border-danger' : 'border-0' "
-              placeholder="Search by cryptocurrency name"
-              name="searchTerm"
-              v-model="searchTerm"
-            />
-            <i
-              class="fas fa-search search-icon position-absolute"
-              @click="handleSubmit(onSubmit)"
-            ></i>
-            <span class="error-span mt-2 text-danger">{{errors[0]}}</span>
-            </ValidationProvider>
-          </div>
-        </form>
+        <ValidationObserver v-slot="{ handleSubmit }">
+          <form @submit.prevent="handleSubmit(onSubmit)" novalidate>
+            <div class="form-group position-relative">
+              <ValidationProvider
+                name="searchInput"
+                rules="required|alpha_num"
+                v-slot="{ errors }"
+              >
+                <input
+                  type="text"
+                  class="form-control rounded-pill shadow-lg"
+                  :class="errors[0] ? 'border-danger' : 'border-0'"
+                  placeholder="Search by cryptocurrency name"
+                  name="searchTerm"
+                  v-model="searchTerm"
+                />
+                <i
+                  class="fas fa-search search-icon position-absolute"
+                  @click="handleSubmit(onSubmit)"
+                ></i>
+                <span class="error-span mt-2 text-danger">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </div>
+          </form>
         </ValidationObserver>
       </div>
       <div class="col-6">
@@ -92,6 +92,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 import { ValidationObserver, ValidationProvider } from "vee-validate";
 import "../forms/rules/req";
 import "../forms/rules/alpha_num_req";
@@ -109,8 +110,9 @@ export default {
   },
   methods: {
     onSubmit() {
-      console.log("onsubmit run", this.searchTerm);
+      this.setSearchTerm(this.searchTerm);
     },
+    ...mapActions(["setSearchTerm"]),
   },
 };
 </script>
