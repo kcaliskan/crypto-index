@@ -1,12 +1,13 @@
 /*eslint-disable*/
 import router from "../../router";
+import { REDIRECT_TO_PATH } from "./types";
 
 const state = {};
 
 const getters = {};
 
 const actions = {
-  redirectToPath: ({ commit }, path) => {
+  [REDIRECT_TO_PATH]: ({ commit }, path) => {
     router.push({ path });
   },
 };
@@ -18,5 +19,5 @@ export default {
   state,
   getters,
   actions,
-  mutations
-}
+  mutations,
+};

@@ -1,9 +1,9 @@
 <template>
-  <div v-if="showLoading"><Loading /></div>
+  <div v-if="SHOW_LOADING"><Loading /></div>
   <div v-else>
-    <div v-if="!!searchResult.length">
+    <div v-if="!!CRYPTO_SEARCH_RESULT.length">
       <CryptoList
-        :cryptoData="searchResult"
+        :cryptoData="CRYPTO_SEARCH_RESULT"
         :fetchErrorMessage="fetchErrorMessage"
         :tableTitles="tableTitles"
         :tableDataFields="tableDataFields"
@@ -16,7 +16,7 @@
       <div class="container">
         <div class="row wrapper-row mt-5 p-5 align-items-center">
           <div class="col-6 text-center">
-            <h2 class="mb-4">No result for "{{ searchTerm }}" found :(</h2>
+            <h2 class="mb-4">No result for "{{ SEARCH_TERM }}" found :(</h2>
             <router-link :to="componentPaths.HOME" class="btn btn-primary"
               >Please click to make a new search</router-link
             >
@@ -44,6 +44,7 @@ import {
 } from "../constants";
 
 import { componentPaths } from "../router/modules/routableComponents";
+import {SEARCH_STORE, CLEAR_SEARCH_TERM, CRYPTO_STORE, CHECK_LOCAL_STORAGE_PORTFOLIO, SEARCH_TERM,CRYPTO_SEARCH_RESULT, SHOW_LOADING} from "../store/modules/types";
 
 export default {
   name: "SearchResult",
@@ -59,18 +60,18 @@ export default {
     };
   },
   methods: {
-    ...mapActions("search", ["clearSearchTerm"]),
-    ...mapActions("crypto", ["checkLocalStoragePortfolio"]),
+    ...mapActions(SEARCH_STORE, [CLEAR_SEARCH_TERM]),
+    ...mapActions(CRYPTO_STORE, [CHECK_LOCAL_STORAGE_PORTFOLIO]),
   },
   computed: {
-    ...mapGetters("search", ["searchTerm", "searchResult"]),
-    ...mapGetters("crypto", ["showLoading"]),
+    ...mapGetters(SEARCH_STORE, [SEARCH_TERM, CRYPTO_SEARCH_RESULT]),
+    ...mapGetters(CRYPTO_STORE, [SHOW_LOADING]),
   },
   created() {
-    this.checkLocalStoragePortfolio();
+    this.CHECK_LOCAL_STORAGE_PORTFOLIO();
   },
   beforeUnmount() {
-    this.clearSearchTerm();
+    this.CLEAR_SEARCH_TERM();
   },
 };
 </script>

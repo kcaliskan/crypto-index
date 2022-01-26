@@ -1,6 +1,6 @@
 <template>
   <CryptoList
-    :cryptoData="cryptoValues"
+    :cryptoData="CRYPTO_VALUES"
     :fetchErrorMessage="fetchErrorMessage"
     :tableTitles="tableTitles"
     :tableDataFields="tableDataFields"
@@ -22,6 +22,13 @@ import {
   CRYPTO_DATA_PRECISIONS,
 } from "../constants";
 
+import {
+  CRYPTO_STORE,
+  CRYPTO_VALUES,
+  FETCH_CRYPTO_CURRENCIES,
+  SHOW_LOADING,
+} from "../store/modules/types";
+
 export default {
   name: "TrendingListings",
   components: {
@@ -37,14 +44,14 @@ export default {
     };
   },
   methods: {
-    ...mapActions("crypto", ["fetchCryptoCurrencies"]),
+    ...mapActions(CRYPTO_STORE, [FETCH_CRYPTO_CURRENCIES]),
   },
   computed: {
-    ...mapGetters("crypto", ["cryptoValues", "showLoading"]),
+    ...mapGetters(CRYPTO_STORE, [CRYPTO_VALUES, SHOW_LOADING]),
   },
   beforeMount() {
-    if (!this.cryptoValues.length) {
-      this.fetchCryptoCurrencies();
+    if (!this.CRYPTO_VALUES.length) {
+      this.FETCH_CRYPTO_CURRENCIES();
     }
   },
 };

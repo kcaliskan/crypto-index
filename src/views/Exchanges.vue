@@ -1,6 +1,6 @@
 <template>
   <CryptoList
-    :cryptoData="exchangeValues"
+    :cryptoData="EXCHANGE_VALUES"
     :fetchErrorMessage="fetchErrorMessage"
     :tableTitles="tableTitles"
     :tableDataFields="tableDataFields"
@@ -21,6 +21,12 @@ import {
   EXCHANGE_DATA_PRECISIONS,
 } from "../constants";
 
+import {
+  CRYPTO_STORE,
+  FETCH_EXCHANGES,
+  EXCHANGE_VALUES,
+} from "../store/modules/types";
+
 export default {
   name: "Exchanges",
   components: {
@@ -36,14 +42,14 @@ export default {
     };
   },
   methods: {
-    ...mapActions("crypto", ["fetchExchanges"]),
+    ...mapActions(CRYPTO_STORE, [FETCH_EXCHANGES]),
   },
   computed: {
-    ...mapGetters("crypto", ["exchangeValues"]),
+    ...mapGetters(CRYPTO_STORE, [EXCHANGE_VALUES]),
   },
   beforeMount() {
-    if (!this.exchangeValues.length) {
-      this.fetchExchanges();
+    if (!this.EXCHANGE_VALUES.length) {
+      this.FETCH_EXCHANGES();
     }
   },
 };

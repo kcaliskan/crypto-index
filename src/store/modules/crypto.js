@@ -1,42 +1,61 @@
 import cryptoApi from "../../api/crypto";
-import { CRYPTO_API, CRYPTO_PORTFOLIO } from "../../constants";
+import { CRYPTO_API, CRYPTO_PORTFOLIO_LOCAL } from "../../constants";
+
+import {
+  CRYPTO_DATA,
+  EXCHANGE_DATA,
+  CRYPTO_PORTFOLIO,
+  SHOW_LOADING,
+  CRYPTO_VALUES,
+  EXCHANGE_VALUES,
+  CRYPTO_PORTFOLIO_FULL_DATA,
+  SET_SHOW_LOADING,
+  FETCH_CRYPTO_CURRENCIES,
+  SET_CRYPTO_CURRENCY_VALUES,
+  FETCH_EXCHANGES,
+  SET_EXCHANGE_VALUES,
+  ADD_TO_PORTFOLIO,
+  UPDATE_PORTFOLIO,
+  REMOVE_FROM_PORTFOLIO,
+  CHECK_LOCAL_STORAGE_PORTFOLIO
+} from "./types";
 
 const state = {
-  cryptoData: [],
-  exchangeData: [],
-  portfolio: [],
-  showLoading: true,
+  [CRYPTO_DATA]: [],
+  [EXCHANGE_DATA]: [],
+  [CRYPTO_PORTFOLIO]: [],
+  [SHOW_LOADING]: true,
 };
 
 const getters = {
-  cryptoValues: (state) => state.cryptoData,
-  exchangeValues: (state) => state.exchangeData,
-  showLoading: (state) => state.showLoading,
-  cryptoPortfolio: (state) => state.portfolio,
-  cryptoPortfolioFullData: (state) => {
-    return state.cryptoData.filter((crypto) =>
-      state.portfolio.includes(crypto.id)
+  [CRYPTO_VALUES]: (state) => state.CRYPTO_DATA,
+  [EXCHANGE_VALUES]: (state) => state.EXCHANGE_DATA,
+  [SHOW_LOADING]: (state) => state.SHOW_LOADING,
+  [CRYPTO_PORTFOLIO]: (state) => state.CRYPTO_PORTFOLIO,
+  [CRYPTO_PORTFOLIO_FULL_DATA]: (state) => {
+    return state.CRYPTO_DATA.filter((crypto) =>
+      state.CRYPTO_PORTFOLIO.includes(crypto.id)
     );
   },
 };
 
 const actions = {
-  setShowLoading: ({ commit }, value) => {
-    commit("setShowLoading", value);
+  [SET_SHOW_LOADING]: ({ commit }, value) => {
+    commit(SET_SHOW_LOADING, value);
   },
-  fetchCryptoCurrencies: async ({ commit }) => {
-    commit("setShowLoading", true);
+  [FETCH_CRYPTO_CURRENCIES]: async ({ commit }) => {
+    commit(SET_SHOW_LOADING, true);
 
     const {
       data: { data },
     } = await cryptoApi.fetchData(CRYPTO_API.BASE_URL, CRYPTO_API.CRYPTO_PATH);
 
-    commit("setCryptoCurrencyValues", data);
-    commit("setShowLoading", false);
+    commit(SET_CRYPTO_CURRENCY_VALUES, data);
+    commit(SET_SHOW_LOADING, false);
   },
 
-  fetchExchanges: async ({ commit }) => {
-    commit("setShowLoading", true);
+  [FETCH_EXCHANGES]: async ({ commit }) => {
+    commit(SET_SHOW_LOADING, true);
 
     const {
       data: { data },
@@ -45,54 +64,59 @@ const actions = {
       CRYPTO_API.EXCHANGE_PATH
     );
 
-    commit("setExchangeValues", data);
-    commit("setShowLoading", false);
+    commit(SET_EXCHANGE_VALUES, data);
+    commit(SET_SHOW_LOADING, false);
   },
 
-  addToPortfolio: ({ commit }, cryptoId) => {
+  [ADD_TO_PORTFOLIO]: ({ commit }, cryptoId) => {
     const portfolio =
-      JSON.parse(window.localStorage.getItem(CRYPTO_PORTFOLIO)) || [];
+      JSON.parse(window.localStorage.getItem(CRYPTO_PORTFOLIO_LOCAL)) || [];
 
     portfolio.push(cryptoId);
-    window.localStorage.setItem(CRYPTO_PORTFOLIO, JSON.stringify(portfolio));
-    commit("updatePortfolio", portfolio);
+    window.localStorage.setItem(
+      CRYPTO_PORTFOLIO_LOCAL,
+      JSON.stringify(portfolio)
+    );
+    commit(UPDATE_PORTFOLIO, portfolio);
   },
 
-  removeFromPortfolio: ({ commit }, targetCryptoId) => {
-    const portfolio = JSON.parse(window.localStorage.getItem(CRYPTO_PORTFOLIO));
+  [REMOVE_FROM_PORTFOLIO]: ({ commit }, targetCryptoId) => {
+    const portfolio = JSON.parse(
+      window.localStorage.getItem(CRYPTO_PORTFOLIO_LOCAL)
+    );
 
     const updatedPortfolio = portfolio.filter(
       (cryptoId) => cryptoId !== targetCryptoId
     );
 
     window.localStorage.setItem(
-      CRYPTO_PORTFOLIO,
+      CRYPTO_PORTFOLIO_LOCAL,
       JSON.stringify(updatedPortfolio)
     );
 
-    commit("updatePortfolio", updatedPortfolio);
+    commit(UPDATE_PORTFOLIO, updatedPortfolio);
   },
 
-  checkLocalStoragePortfolio: ({ commit }) => {
+  [CHECK_LOCAL_STORAGE_PORTFOLIO]: ({ commit }) => {
     const portfolio =
-      JSON.parse(window.localStorage.getItem(CRYPTO_PORTFOLIO)) || [];
+      JSON.parse(window.localStorage.getItem(CRYPTO_PORTFOLIO_LOCAL)) || [];
 
-    commit("updatePortfolio", portfolio);
+    commit(UPDATE_PORTFOLIO, portfolio);
   },
 };
 
 const mutations = {
-  setCryptoCurrencyValues: (state, data) => {
-    state.cryptoData = data;
+  [SET_CRYPTO_CURRENCY_VALUES]: (state, data) => {
+    state.CRYPTO_DATA = data;
   },
-  setExchangeValues: (state, data) => {
-    state.exchangeData = data;
+  [SET_EXCHANGE_VALUES]: (state, data) => {
+    state.EXCHANGE_DATA = data;
   },
-  setShowLoading: (state, data) => {
-    state.showLoading = data;
+  [SET_SHOW_LOADING]: (state, data) => {
+    state.SHOW_LOADING = data;
   },
-  updatePortfolio: (state, data) => {
-    state.portfolio = data;
+  [UPDATE_PORTFOLIO]: (state, data) => {
+    state.CRYPTO_PORTFOLIO = data;
   },
 };
 
