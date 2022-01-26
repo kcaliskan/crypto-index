@@ -47,7 +47,9 @@
             <p class="card-text mt-2 card-description">
               Get to know about the most popular and trending cryptocurrencies
             </p>
-            <router-link :to="componentPaths.TRENDING_LISTINGS" class="btn btn-dark text-light text-center"
+            <router-link
+              :to="componentPaths.TRENDING_LISTINGS"
+              class="btn btn-dark text-light text-center"
               >Trending Listings</router-link
             >
           </div>
@@ -64,7 +66,9 @@
             <p class="card-text mt-2 card-description">
               Keep up with the crypto exchange markets.
             </p>
-            <router-link :to="componentPaths.EXCHANGES" class="btn btn-dark text-light text-center"
+            <router-link
+              :to="componentPaths.EXCHANGES"
+              class="btn btn-dark text-light text-center"
               >Exchanges</router-link
             >
           </div>
@@ -81,7 +85,9 @@
             <p class="card-text mt-2 card-description">
               Check your portfolio and see how they perform.
             </p>
-            <router-link :to="componentPaths.PORTFOLIO" class="btn btn-dark text-light text-center"
+            <router-link
+              :to="componentPaths.PORTFOLIO"
+              class="btn btn-dark text-light text-center"
               >My Portfolio</router-link
             >
           </div>
@@ -99,6 +105,8 @@ import "../forms/rules/alpha_num_req";
 
 import { componentPaths } from "../router/modules/routableComponents";
 
+import { SEARCH_STORE, SET_SEARCH_TERM } from "../store/modules/types";
+
 export default {
   name: "Home",
   components: {
@@ -113,9 +121,9 @@ export default {
   },
   methods: {
     onSubmit() {
-      this.setSearchTerm(this.searchTerm);
+      this.SET_SEARCH_TERM(this.searchTerm);
     },
-    ...mapActions("search", ["setSearchTerm"]),
+    ...mapActions(SEARCH_STORE, [SET_SEARCH_TERM]),
   },
 };
 </script>

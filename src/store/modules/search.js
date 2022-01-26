@@ -1,47 +1,67 @@
 import { componentPaths } from "../../router/modules/routableComponents";
+import {
+  APP_STORE,
+  SEARCH_TERM,
+  CRYPTO_SEARCH_RESULT,
+  SET_SEARCH_TERM,
+  UPDATE_SEARCH_TERM,
+  UPDATE_SEARCH_RESULT,
+  CRYPTO_STORE,
+  CRYPTO_VALUES,
+  CLEAR_SEARCH_TERM,
+  FETCH_CRYPTO_CURRENCIES,
+  SET_SHOW_LOADING,
+  REDIRECT_TO_PATH,
+} from "./types";
 
 /*eslint-disable*/
 const state = {
-  searchTerm: "",
-  searchResult: [],
+  [SEARCH_TERM]: "",
+  [CRYPTO_SEARCH_RESULT]: [],
 };
 
 const getters = {
-  searchTerm: (state) => state.searchTerm,
-  searchResult: (state) => state.searchResult,
+  [SEARCH_TERM]: (state) => state.SEARCH_TERM,
+  [CRYPTO_SEARCH_RESULT]: (state) => state.CRYPTO_SEARCH_RESULT,
 };
 
 const actions = {
-  setSearchTerm: async ({ dispatch, commit, getters, rootGetters }, value) => {
-    commit("updateSearchTerm", value);
-    dispatch("app/redirectToPath", componentPaths.SEARCH_RESULT, {
+  [SET_SEARCH_TERM]: async (
+    { dispatch, commit, getters, rootGetters },
+    value
+  ) => {
+    commit(UPDATE_SEARCH_TERM, value);
+    dispatch(`${APP_STORE}/${REDIRECT_TO_PATH}`, componentPaths.SEARCH_RESULT, {
       root: true,
     });
-    await dispatch("crypto/fetchCryptoCurrencies", null, { root: true });
-    dispatch("crypto/setShowLoading", true, { root: true });
-    const cryptoData = rootGetters["crypto/cryptoValues"];
+    await dispatch(`${CRYPTO_STORE}/${FETCH_CRYPTO_CURRENCIES}`, null, {
+      root: true,
+    });
+    dispatch(`${CRYPTO_STORE}/${SET_SHOW_LOADING}`, true, { root: true });
+
+    const cryptoData = rootGetters[`${CRYPTO_STORE}/${CRYPTO_VALUES}`];
 
     const searchResult = cryptoData.filter((crypto) => {
       return crypto.name.toLowerCase().trim() === value.toLowerCase().trim();
     });
 
-    commit("updateSearchResult", searchResult);
-    dispatch("crypto/setShowLoading", false, { root: true });
+    commit(UPDATE_SEARCH_RESULT, searchResult);
+    dispatch(`${CRYPTO_STORE}/${SET_SHOW_LOADING}`, false, { root: true });
   },
 
-  clearSearchTerm: ({ commit }) => {
-    commit("updateSearchTerm", "");
-    commit("updateSearchResult", []);
+  [CLEAR_SEARCH_TERM]: ({ commit }) => {
+    commit(UPDATE_SEARCH_TERM, "");
+    commit(UPDATE_SEARCH_RESULT, []);
   },
 };
 
 const mutations = {
-  updateSearchTerm: (state, value) => {
-    state.searchTerm = value;
+  [UPDATE_SEARCH_TERM]: (state, value) => {
+    state.SEARCH_TERM = value;
   },
 
-  updateSearchResult: (state, value) => {
-    state.searchResult = value;
+  [UPDATE_SEARCH_RESULT]: (state, value) => {
+    state.CRYPTO_SEARCH_RESULT = value;
   },
 };
 

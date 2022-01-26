@@ -67,5 +67,5 @@ module.exports = {
     volumeUsd: 3,
     percentTotalVolume: 2,
   },
-  CRYPTO_PORTFOLIO: "crypto_portfolio",
+  CRYPTO_PORTFOLIO_LOCAL: "crypto_portfolio_local",
 };

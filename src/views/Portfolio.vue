@@ -1,7 +1,8 @@
 <template>
-  <div v-if="!!cryptoPortfolioFullData.length">
+  <div v-if="SHOW_LOADING"><Loading /></div>
+  <div v-else-if="!!CRYPTO_PORTFOLIO_FULL_DATA.length">
     <CryptoList
-      :cryptoData="cryptoPortfolioFullData"
+      :cryptoData="CRYPTO_PORTFOLIO_FULL_DATA"
       :fetchErrorMessage="fetchErrorMessage"
       :tableTitles="tableTitles"
       :tableDataFields="tableDataFields"
@@ -37,6 +38,7 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import CryptoList from "../components/CryptoList";
+import Loading from "../components/Loading";
 
 import {
   PORTFOLIO,
@@ -48,10 +50,20 @@ import {
 
 import { componentPaths } from "../router/modules/routableComponents";
 
+import {
+  CRYPTO_STORE,
+  CRYPTO_VALUES,
+  FETCH_CRYPTO_CURRENCIES,
+  CHECK_LOCAL_STORAGE_PORTFOLIO,
+  CRYPTO_PORTFOLIO_FULL_DATA,
+  SHOW_LOADING,
+} from "../store/modules/types";
+
 export default {
   name: "Portfolio",
   components: {
     CryptoList,
+    Loading,
   },
   data() {
     return {
@@ -64,16 +76,23 @@ export default {
     };
   },
   methods: {
-    ...mapActions("crypto", ["fetchCryptoCurrencies", "checkLocalStoragePortfolio"]),
+    ...mapActions(CRYPTO_STORE, [
+      FETCH_CRYPTO_CURRENCIES,
+      CHECK_LOCAL_STORAGE_PORTFOLIO,
+    ]),
   },
   computed: {
-    ...mapGetters("crypto", ["cryptoValues", "cryptoPortfolioFullData"]),
+    ...mapGetters(CRYPTO_STORE, [
+      CRYPTO_VALUES,
+      CRYPTO_PORTFOLIO_FULL_DATA,
+      SHOW_LOADING,
+    ]),
   },
   created() {
-    this.checkLocalStoragePortfolio();
+    this.CHECK_LOCAL_STORAGE_PORTFOLIO();
 
-    if (!this.cryptoValues.length) {
-      this.fetchCryptoCurrencies();
+    if (!this.CRYPTO_VALUES.length) {
+      this.FETCH_CRYPTO_CURRENCIES();
     }
   },
 };
