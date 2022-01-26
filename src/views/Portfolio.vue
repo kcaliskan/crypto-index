@@ -3,7 +3,7 @@
   <div v-else-if="!!CRYPTO_PORTFOLIO_FULL_DATA.length">
     <CryptoList
       :cryptoData="CRYPTO_PORTFOLIO_FULL_DATA"
-      :fetchErrorMessage="fetchErrorMessage"
+      :fetchErrorMessage="PORTFOLIO.fetchErrorMessage"
       :tableTitles="tableTitles"
       :tableDataFields="tableDataFields"
       :tableDataSymbols="tableDataSymbols"
@@ -16,12 +16,12 @@
       <div class="row wrapper-row mt-5 p-5 align-items-center">
         <div class="col-6 text-center">
           <h1 class="mb-4">
-            You don't have any cryptocurrency in your portfolio.
+            {{ PORTFOLIO.NO_PORTFOLIO_ERROR_MESSAGE }}
           </h1>
           <router-link
             :to="componentPaths.TRENDING_LISTINGS"
             class="btn btn-primary"
-            >Check trending cryptos to add your portfolio</router-link
+            >{{ PORTFOLIO.TRENDING_LISTINGS_BTN_TEXT }}</router-link
           >
         </div>
         <div class="col-6 text-center">
@@ -67,8 +67,8 @@ export default {
   },
   data() {
     return {
+      PORTFOLIO,
       componentPaths,
-      fetchErrorMessage: PORTFOLIO.fetchErrorMessage,
       tableTitles: CRYPTO_TABLE_TITLES,
       tableDataFields: CRYPTO_TABLE_DATA_FIELDS,
       tableDataSymbols: CRYPTO_DATA_SYMBOLS,

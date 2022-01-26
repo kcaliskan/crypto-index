@@ -3,7 +3,7 @@
     <div class="row wrapper-row mt-5 p-5 align-items-center">
       <div class="col-6">
         <h2 class="text-center mb-5">
-          Keep up with the crypto world by searching coins!
+          {{ HOME.HEADER_TEXT }}
         </h2>
         <ValidationObserver v-slot="{ handleSubmit }">
           <form @submit.prevent="handleSubmit(onSubmit)" novalidate>
@@ -17,7 +17,7 @@
                   type="text"
                   class="form-control rounded-pill shadow-lg"
                   :class="errors[0] ? 'border-danger' : 'border-0'"
-                  placeholder="Search by cryptocurrency name"
+                  :placeholder="HOME.SEARCH_INPUT_PLACEHOLDER_TEXT"
                   name="searchTerm"
                   v-model="searchTerm"
                 />
@@ -45,12 +45,12 @@
               alt="trending-cryptocurrencies"
             />
             <p class="card-text mt-2 card-description">
-              Get to know about the most popular and trending cryptocurrencies
+              {{ HOME.TRENDING_CARD_DESCRIPTION_TEXT }}
             </p>
             <router-link
               :to="componentPaths.TRENDING_LISTINGS"
               class="btn btn-dark text-light text-center"
-              >Trending Listings</router-link
+              >{{ HOME.TRENDING_CARD_BTN_TEXT }}</router-link
             >
           </div>
         </div>
@@ -64,12 +64,12 @@
               alt="crypto-exchanges"
             />
             <p class="card-text mt-2 card-description">
-              Keep up with the crypto exchange markets.
+              {{ HOME.EXCHANGE_CARD_DESCRIPTION_TEXT }}
             </p>
             <router-link
               :to="componentPaths.EXCHANGES"
               class="btn btn-dark text-light text-center"
-              >Exchanges</router-link
+              >{{ HOME.EXCHANGES_CARD_BTN_TEXT }}</router-link
             >
           </div>
         </div>
@@ -83,12 +83,12 @@
               alt="portfolio"
             />
             <p class="card-text mt-2 card-description">
-              Check your portfolio and see how they perform.
+              {{ HOME.PORTFOLIO_CARD_DESCRIPTION_TEXT }}
             </p>
             <router-link
               :to="componentPaths.PORTFOLIO"
               class="btn btn-dark text-light text-center"
-              >My Portfolio</router-link
+              >{{ HOME.PORTFOLIO_CARD_BTN_TEXT }}</router-link
             >
           </div>
         </div>
@@ -106,6 +106,9 @@ import "../forms/rules/alpha_num_req";
 import { componentPaths } from "../router/modules/routableComponents";
 
 import { SEARCH_STORE, SET_SEARCH_TERM } from "../store/modules/types";
+import {
+HOME
+} from "../constants";
 
 export default {
   name: "Home",
@@ -117,6 +120,7 @@ export default {
     return {
       searchTerm: "",
       componentPaths,
+HOME
     };
   },
   methods: {
