@@ -1,7 +1,7 @@
 <template>
   <CryptoList
     :cryptoData="CRYPTO_VALUES"
-    :fetchErrorMessage="fetchErrorMessage"
+    :fetchErrorMessage="TRENDING_LISTING.fetchErrorMessage"
     :tableTitles="tableTitles"
     :tableDataFields="tableDataFields"
     :tableDataSymbols="tableDataSymbols"
@@ -23,9 +23,9 @@ import {
 } from "../constants";
 
 import {
+  FETCH_CRYPTO_CURRENCIES,
   CRYPTO_STORE,
   CRYPTO_VALUES,
-  FETCH_CRYPTO_CURRENCIES,
   SHOW_LOADING,
 } from "../store/modules/types";
 
@@ -36,7 +36,7 @@ export default {
   },
   data() {
     return {
-      fetchErrorMessage: TRENDING_LISTING.fetchErrorMessage,
+      TRENDING_LISTING,
       tableTitles: CRYPTO_TABLE_TITLES,
       tableDataFields: CRYPTO_TABLE_DATA_FIELDS,
       tableDataSymbols: CRYPTO_DATA_SYMBOLS,

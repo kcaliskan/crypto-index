@@ -1,11 +1,9 @@
 <template>
   <nav class="navbar navbar-dark bg-dark navbar-expand-sm">
     <div class="container">
-      <router-link 
-      class="navbar-brand" 
-      :to="componentPaths.HOME"
-        >Crypto Index</router-link
-      >
+      <router-link class="navbar-brand" :to="componentPaths.HOME">{{
+        HEADER.LOGO_TEXT
+      }}</router-link>
       <button
         class="navbar-toggler"
         type="button"
@@ -26,7 +24,7 @@
               aria-current="page"
               :to="componentPaths.TRENDING_LISTINGS"
             >
-              Trending Listings</router-link
+              {{ HEADER.TRENDING_LISTINGS_BTN_TEXT }}</router-link
             >
           </li>
           <li class="nav-item">
@@ -34,7 +32,8 @@
               exact-active-class="active"
               class="nav-link"
               :to="componentPaths.EXCHANGES"
-              >Exchanges</router-link
+            >
+              {{ HEADER.EXCHANGES_BTN_TEXT }}</router-link
             >
           </li>
           <li class="nav-item">
@@ -42,7 +41,7 @@
               exact-active-class="active"
               class="nav-link"
               :to="componentPaths.PORTFOLIO"
-              >Portfolio</router-link
+              >{{ HEADER.PORTFOLIO_BTN_TEXT }}</router-link
             >
           </li>
         </ul>
@@ -54,10 +53,13 @@
 <script>
 import { componentPaths } from "../router/modules/routableComponents";
 
+import { HEADER } from "../constants";
+
 export default {
   name: "Header",
   data: function () {
     return {
+      HEADER,
       componentPaths,
     };
   },
