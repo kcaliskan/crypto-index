@@ -9,7 +9,6 @@ export default {
   component: SearchResult,
   beforeEnter: (to, from, next) => {
     const searchTerm = store.getters[`${SEARCH_STORE}/${SEARCH_TERM}`];
-
     if (!searchTerm) {
       next(componentPaths.HOME);
     } else {
